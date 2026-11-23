@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Auren</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--a:#F8F9FA;--b:#F3F4F6;--l:#E5E7EB;--ink:#111827;--mu:#6B7280;--navy:#0F172A;--gold:#8B7355;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{height:100%;scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;height:100%;background:#fff;color:var(--ink);font:15px/1.5 Inter,system-ui,-apple-system,"Segoe UI",sans-serif}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer;background:none;border:0}
+:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+[hidden]{display:none!important}
+.serif{font-family:"Cormorant Garamond",Georgia,serif}
+.word{font-family:"Cormorant Garamond",Georgia,serif;font-weight:600;letter-spacing:.42em;color:var(--navy)}
+.mono{width:34px;height:34px;border-radius:8px;background:var(--navy);color:#C9B68F;display:grid;place-items:center;font:600 20px "Cormorant Garamond",Georgia,serif;border:1px solid var(--gold)}
+.btn{background:var(--navy);color:#fff;border-radius:8px;padding:.65rem 1.1rem;font-weight:500}
+.btn:hover{background:#1E293B}
+.btn.o{background:#fff;color:var(--ink);border:1px solid var(--l)}
+.btn.o:hover{background:var(--b)}
+.ib{width:36px;height:36px;border-radius:8px;display:inline-grid;place-items:center;color:var(--mu)}
+.ib:hover{background:var(--b);color:var(--ink)}
+.av{border-radius:50%;display:grid;place-items:center;color:#fff;font-weight:500;flex:none}
+/* login */
+#login{min-height:100%;display:grid;place-items:center;background:var(--a);padding:1.5rem}
+.card{background:#fff;border:1px solid var(--l);border-radius:12px;padding:2.5rem 2rem;width:100%;max-width:400px;box-shadow:0 1px 2px rgba(17,24,39,.04)}
+.card .mono{margin:0 auto 1rem;width:48px;height:48px;font-size:28px}
+.card h1{margin:0;text-align:center;font-size:1.6rem}
+.tag{text-align:center;color:var(--mu);font-style:italic;margin:.5rem 0 1.5rem}
+.card input{width:100%;border:1px solid var(--l);border-radius:8px;padding:.65rem .8rem;margin-bottom:.75rem;background:#fff}
+.card .btn{width:100%}
+.or{text-align:center;color:var(--mu);font-size:.8rem;margin:1rem 0}
+.oa{display:grid;grid-template-columns:1fr 1fr;gap:.5rem}
+/* app */
+#app{display:grid;grid-template-columns:320px 1fr;height:100%}
+@media(min-width:900px){#app.io{grid-template-columns:320px 1fr 300px}.back{display:none}}
+#side{background:var(--a);border-right:1px solid var(--l);display:flex;flex-direction:column;min-height:0}
+.bh{display:flex;align-items:center;gap:.75rem;padding:1rem 1rem .5rem}
+.bh .word{font-size:1.15rem;flex:1}
+.tabs{display:flex;gap:1.5rem;padding:.25rem 1.25rem 0;border-bottom:1px solid var(--l)}
+.tabs button{padding:.55rem 0;color:var(--mu);font-weight:500;border-bottom:2px solid transparent;margin-bottom:-1px}
+.tabs button.on{color:var(--navy);border-color:var(--gold)}
+#q{margin:.9rem 1rem .5rem;border:0;border-radius:999px;padding:.6rem 1rem;background:var(--b)}
+.fl{display:flex;gap:.25rem;padding:0 1rem .5rem;overflow-x:auto}
+.fl button{white-space:nowrap;padding:.25rem .8rem;border-radius:999px;border:0;background:transparent;color:var(--mu);font-size:.82rem}
+.fl button.on{background:#fff;color:var(--navy);font-weight:600;box-shadow:0 1px 2px rgba(17,24,39,.1)}
+#list{list-style:none;margin:0;padding:0 .5rem .5rem;overflow:auto;flex:1}
+#list li{display:flex;gap:.8rem;padding:.75rem;margin:2px 0;border-radius:12px;cursor:pointer}
+#list li:hover{background:#fff}
+#list li.on{background:#fff;box-shadow:0 1px 3px rgba(17,24,39,.08),0 0 0 1px var(--l)}
+.li{flex:1;min-width:0}
+.r1,.r2{display:flex;justify-content:space-between;gap:.5rem}
+.r1 b{font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.r1 span,.r2 span{color:var(--mu);font-size:.8rem}
+.r2 span:first-child{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.badge{background:var(--gold);color:#fff;border-radius:999px;font-size:.7rem;padding:0 .45rem;min-width:18px;text-align:center}
+#chat{display:flex;flex-direction:column;min-width:0;min-height:0}
+.ch{display:flex;align-items:center;gap:.9rem;padding:.9rem 1.25rem;background:#fff;box-shadow:0 1px 0 var(--l),0 8px 16px -14px rgba(17,24,39,.2);z-index:1}
+.ch .t{flex:1;min-width:0;cursor:pointer}
+.ch .t b{display:block;font:600 1.35rem/1.2 "Cormorant Garamond",Georgia,serif;color:var(--navy)}
+.ch .t span{color:var(--mu);font-size:.8rem}
+.dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:.35rem}
+#msgs{flex:1;overflow:auto;padding:1.5rem clamp(1rem,4vw,2.5rem);display:flex;flex-direction:column;gap:.8rem;background:#FBFAF8}
+.row{display:flex;flex-direction:column;align-items:flex-start;position:relative;max-width:min(560px,85%)}
+.row.mine{align-self:flex-end;align-items:flex-end}
+.bub{background:#fff;border:1px solid var(--l);border-radius:18px 18px 18px 4px;padding:.6rem 1rem;box-shadow:0 1px 2px rgba(17,24,39,.04)}
+.mine .bub{background:var(--navy);border-color:var(--navy);color:#fff;border-radius:18px 18px 4px 18px}
+.who{font-size:.75rem;color:var(--gold);font-weight:600}
+.meta{font-size:.7rem;opacity:.6;text-align:right;margin-top:.15rem}
+.tk.rd{color:#C9B68F;opacity:1}
+.quote{border-left:2px solid var(--gold);padding-left:.5rem;font-size:.8rem;opacity:.75;margin-bottom:.25rem}
+.file{display:flex;gap:.6rem;align-items:center;background:#fff;color:var(--ink);border:1px solid var(--l);border-radius:8px;padding:.5rem .7rem;margin-bottom:.25rem}
+.file i{font-style:normal;font-size:.65rem;font-weight:600;background:var(--navy);color:#C9B68F;border-radius:4px;padding:.25rem .35rem}
+.file small{display:block;color:var(--mu)}
+.file a{margin-left:.5rem;font-size:.8rem;color:var(--gold)}
+.rx{display:flex;gap:.25rem;margin-top:.2rem}
+.rx span{background:#fff;border:1px solid var(--l);border-radius:999px;font-size:.75rem;padding:0 .4rem}
+.hov{display:none;position:absolute;top:-16px;right:0;background:#fff;border:1px solid var(--l);border-radius:8px;padding:2px;z-index:2;box-shadow:0 2px 6px rgba(17,24,39,.08)}
+.mine .hov{right:auto;left:0}
+.row:hover .hov{display:flex}
+.hov button{padding:2px 5px;border-radius:6px}
+.hov button:hover{background:var(--b)}
+.sys{align-self:center;color:var(--mu);font-size:.8rem;background:var(--a);border:1px solid var(--l);border-radius:999px;padding:.15rem .8rem;display:flex;gap:.4rem;align-items:center}
+#typing{padding:0 1rem .25rem;color:var(--mu);font-size:.8rem;min-height:1.4rem}
+#rp{display:flex;justify-content:space-between;margin:0 1rem;padding:.4rem .75rem;background:var(--a);border-left:2px solid var(--gold);font-size:.8rem;color:var(--mu)}
+.cmp{display:flex;gap:.25rem;align-items:center;margin:.5rem clamp(.75rem,3vw,2rem) 1rem;padding:.35rem .5rem;background:#fff;border:1px solid var(--l);border-radius:999px;box-shadow:0 6px 20px -8px rgba(17,24,39,.15);position:relative}.cmp .btn{border-radius:50%;width:38px;height:38px;padding:0!important;display:grid;place-items:center}
+.cmp input[type=text]{flex:1;border:0;background:none;padding:.6rem .5rem;min-width:0;outline:0}
+#emo{position:absolute;bottom:64px;right:60px;background:#fff;border:1px solid var(--l);border-radius:12px;padding:.5rem;display:grid;grid-template-columns:repeat(8,1fr);gap:2px;box-shadow:0 8px 24px rgba(17,24,39,.12);z-index:5}
+#emo button{font-size:1.2rem;padding:4px;border-radius:6px}
+#emo button:hover{background:var(--b)}
+.req{margin:1rem;padding:1rem;background:var(--a);border:1px solid var(--l);border-radius:12px}
+.req p{margin:.25rem 0 .75rem;font-style:italic}
+.empty{margin:auto;text-align:center;color:var(--mu)}
+#info{display:none;border-left:1px solid var(--l);background:#fff;overflow:auto;padding:1.5rem 1.25rem}
+#app.io #info{display:block}
+#info h4{margin:1.25rem 0 .5rem;font-size:.8rem;color:var(--mu);font-weight:600}
+.pc{text-align:center}
+.pc .av{margin:0 auto .5rem}
+.pc h3{margin:0;font:600 1.4rem "Cormorant Garamond",Georgia,serif}
+.pc p{margin:.1rem 0;color:var(--mu)}
+#info .file{background:var(--a)}
+.cl{display:flex;gap:.5rem;align-items:center;padding:.8rem 1rem}
+.cl .li{flex:1}
+@media(max-width:899px){#app{grid-template-columns:1fr}#app.vc #side{display:none}#app:not(.vc) #chat{display:none}#info{position:fixed;inset:0;z-index:20;padding-top:calc(1.25rem + env(safe-area-inset-top,0px))}#app.hm #side{display:none}#app.hm #chat{display:flex}}
+/* call */
+#call{position:fixed;inset:0;background:var(--navy);color:#fff;z-index:50;display:flex;flex-direction:column}
+.stg{flex:1;display:grid;place-items:center;position:relative;min-height:0}
+.me-t{position:absolute;right:1rem;bottom:1rem;width:130px;height:90px;border-radius:8px;background:#1E293B;border:1px solid #334155;display:grid;place-items:center;font-size:.8rem}
+.cinfo{position:absolute;top:1rem;left:1rem;font-size:.85rem;opacity:.85}
+.ctl{display:flex;gap:.5rem;justify-content:center;padding:1rem;flex-wrap:wrap}
+.ctl button{width:46px;height:46px;border-radius:50%;background:#1E293B;color:#fff;display:grid;place-items:center}
+.ctl button.off{background:#fff;color:var(--navy)}
+.ctl .end{background:#B91C1C}
+#cs{position:absolute;right:0;top:0;bottom:0;width:260px;background:#fff;color:var(--ink);padding:.75rem;display:flex;flex-direction:column;gap:.4rem;font-size:.85rem;overflow:auto}
+#call.mini{inset:auto 16px 16px auto;width:280px;height:190px;border-radius:12px;box-shadow:0 12px 32px rgba(15,23,42,.35)}
+#call.mini .ctl{padding:.4rem}
+#call.mini .ctl button{display:none;width:34px;height:34px}
+#call.mini .ctl .end,#call.mini .ctl .pip{display:grid}
+#call.mini .me-t,#call.mini #cs{display:none}
+#inc{position:fixed;top:calc(16px + env(safe-area-inset-top,0px));right:16px;z-index:40;background:#fff;border:1px solid var(--l);border-radius:12px;padding:1rem;width:300px;box-shadow:0 12px 32px rgba(15,23,42,.18)}
+#inc .g{display:flex;gap:.75rem;align-items:center;margin-bottom:.75rem}
+#inc .g small{color:var(--mu);display:block}
+#inc .a{display:flex;gap:.5rem}
+#inc .a button{flex:1}
+#set{position:fixed;inset:0;background:rgba(15,23,42,.4);z-index:60;display:grid;place-items:center;padding:1rem}
+#set .card{max-width:440px;max-height:90%;overflow:auto;padding:1.5rem}
+#set h2{margin:0 0 1rem}
+.tg{display:flex;justify-content:space-between;align-items:center;padding:.55rem 0;border-top:1px solid var(--l)}
+.tg select{border:1px solid var(--l);border-radius:8px;padding:.25rem}
+.tg input{width:auto;margin:0}
+.compact #msgs{gap:.2rem}.compact .bub{padding:.3rem .6rem}
+#splash{position:fixed;inset:0;z-index:100;background:var(--navy);display:grid;place-items:center;transition:transform .9s cubic-bezier(.77,0,.18,1)}
+#splash.up{transform:translateY(-100%)}
+#splash .in{text-align:center;color:#fff;overflow:hidden;padding:.75rem 1rem}
+#splash .mono{margin:0 auto 1.25rem;width:56px;height:56px;font-size:32px;animation:su .9s cubic-bezier(.2,.8,.2,1) both}
+#splash .w{display:block;font:600 clamp(2rem,8vw,3.5rem) 'Cormorant Garamond',Georgia,serif;letter-spacing:.5em;margin-right:-.5em;animation:su .9s .15s cubic-bezier(.2,.8,.2,1) both}
+#splash small{display:block;margin-top:.75rem;color:#C9B68F;font-style:italic;animation:su .9s .35s cubic-bezier(.2,.8,.2,1) both}
+@keyframes su{from{transform:translateY(110%);opacity:0}to{transform:none;opacity:1}}
+@media(prefers-reduced-motion:reduce){#splash .mono,#splash .w,#splash small{animation:none}#splash{transition:opacity .4s}#splash.up{transform:none;opacity:0}}
+#hm{flex:1;overflow:auto;background:#FBFAF8}
+.hbn{height:150px;background:var(--navy);border-bottom:3px solid var(--gold);padding:1.5rem 2rem;color:#fff;font:500 1.5rem 'Cormorant Garamond',Georgia,serif}
+.hw{max-width:760px;margin:-52px auto 0;padding:0 1.25rem 2rem}
+.hc{display:flex;gap:1.25rem;align-items:flex-end;flex-wrap:wrap}
+.hav{border-radius:50%;border:4px solid #FBFAF8;line-height:0}
+.hn{flex:1;min-width:200px;padding-bottom:.25rem}
+.hn h2{margin:0;font:600 2.1rem/1.1 'Cormorant Garamond',Georgia,serif;color:var(--navy)}
+.hn p{margin:.15rem 0;color:var(--mu)}
+#hm select{border:1px solid var(--l);border-radius:999px;padding:.4rem .9rem;background:#fff}
+.hs{display:grid;grid-template-columns:repeat(3,1fr);gap:.75rem;margin:1.5rem 0}
+.hs div{background:#fff;border:1px solid var(--l);border-radius:12px;padding:.9rem 1rem}
+.hs b{display:block;font:600 1.7rem 'Cormorant Garamond',Georgia,serif;color:var(--navy)}
+.hs span{color:var(--mu);font-size:.8rem}
+.hb{background:#fff;border:1px solid var(--l);border-radius:12px;padding:1rem 1.25rem}
+#hm h3{font:600 1.25rem 'Cormorant Garamond',Georgia,serif;margin:1.5rem 0 .6rem;color:var(--navy)}
+.hr{display:flex;gap:.8rem;align-items:center;padding:.7rem 1rem;background:#fff;border:1px solid var(--l);border-radius:12px;margin-bottom:.5rem;width:100%;text-align:left}
+.hr:hover{border-color:var(--gold)}
+@media(prefers-reduced-motion:no-preference){#inc{animation:s .3s ease-out}@keyframes s{from{opacity:0;transform:translateY(-8px)}}}
+</style>
+</head>
+<body>
+<div id="login">
+ <div class="card">
+  <div class="mono">A</div>
+  <h1 class="word">A U R E N</h1>
+  <p class="tag">Private correspondence for modern leaders.</p>
+  <input id="em" type="email" placeholder="Work email" value="alexander@reidpartners.com" aria-label="Work email">
+  <input type="password" placeholder="Password" value="password" aria-label="Password">
+  <button class="btn go">Sign in</button>
+  <div class="or">or continue with</div>
+  <div class="oa"><button class="btn o go">Google</button><button class="btn o go">Microsoft</button></div>
+ </div>
+</div>
+<div id="app" hidden>
+ <aside id="side">
+  <div class="bh"><div class="mono">A</div><span class="word">AUREN</span><button class="ib" id="gear" aria-label="Settings"></button></div>
+  <div class="tabs"><button class="on" data-t="home">Home</button><button data-t="msg">Messages</button><button data-t="calls">Calls</button></div>
+  <div id="sb"><input id="q" type="search" placeholder="Search people and messages" aria-label="Search"><div class="fl" id="fl"></div></div>
+  <ul id="list"></ul>
+ </aside>
+ <main id="chat"></main>
+ <aside id="info"></aside>
+</div>
+<div id="splash" hidden><div class="in"><div class="mono">A</div><span class="w">AUREN</span><small>Private correspondence for modern leaders.</small></div></div>
+<div id="inc" hidden></div>
+<div id="call" hidden></div>
+<div id="set" hidden></div>
+<script>
+const I={phone:'<path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/>',video:'<path d="m22 8-6 4 6 4V8z"/><rect x="2" y="6" width="14" height="12" rx="2"/>',info:'<circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/>',send:'<path d="m22 2-7 20-4-9-9-4 20-7z"/>',clip:'<path d="m21 11-9 9a6 6 0 0 1-8.5-8.5l9-9a4 4 0 0 1 5.7 5.7l-9 9a2 2 0 0 1-2.8-2.8l8.3-8.3"/>',smile:'<circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01"/>',back:'<path d="m15 18-6-6 6-6"/>',mic:'<rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v4"/>',micoff:'<path d="m2 2 20 20M9 9v2a3 3 0 0 0 5 2M15 9V5a3 3 0 0 0-6 0M5 11a7 7 0 0 0 11 5M12 18v4"/>',camoff:'<path d="m2 2 20 20M16 11V8l6-4v12M2 8v8a2 2 0 0 0 2 2h10"/>',screen:'<rect x="2" y="4" width="20" height="13" rx="2"/><path d="M8 21h8M12 17v4"/>',pip:'<rect x="2" y="4" width="20" height="16" rx="2"/><rect x="12" y="12" width="8" height="6" rx="1"/>',gear:'<circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2"/>',chat:'<path d="M21 12a8 8 0 0 1-11.7 7L3 21l2-5.5A8 8 0 1 1 21 12z"/>'};
+const ic=(n,s=18)=>`<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" ${n==='end'?'style="transform:rotate(135deg)"':''}>${n==='end'?I.phone:I[n]}</svg>`;
+const E=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const $=s=>document.querySelector(s);
+const COL=['#0F172A','#8B7355','#334155','#6B5B45','#1E3A5F','#475569','#0F172A'];
+const ST={online:['Online','#4A7C59'],meet:['In a meeting','#8B7355'],call:['On a call','#0F172A'],away:['Away','#9CA3AF']};
+const P={
+e:{n:'Eleanor Voss',h:'@evoss',t:'Managing Partner',c:'Apex Capital',i:'Private Equity',tz:'America/New_York',l:'New York',s:'online',w:'apexcapital.com',b:'Twenty years in growth equity. Backs founders building durable industrial and healthcare businesses.'},
+m:{n:'Marcus Adeyemi',h:'@madeyemi',t:'Founder & CEO',c:'Northwind Labs',i:'Enterprise Software',tz:'Europe/London',l:'London',s:'meet',w:'northwindlabs.io',b:'Building infrastructure software for global logistics. Previously operating partner at a Series B fund.'},
+s:{n:'Sofia Marchetti',h:'@smarchetti',t:'Principal Architect',c:'Marchetti Studio',i:'Architecture',tz:'Europe/Rome',l:'Milan',s:'away',w:'marchettistudio.it',b:'Residential and hospitality architecture across Europe and the Gulf.'},
+j:{n:'Julian Park',h:'@jpark',t:'Luxury Real Estate Advisor',c:'Meridian Estates',i:'Real Estate',tz:'Asia/Dubai',l:'Dubai',s:'online',w:'meridianestates.ae',b:'Off-market residences and private portfolios for global families.'},
+p:{n:'Priya Raman',h:'@praman',t:'Chief Financial Officer',c:'Lumen Health',i:'Healthcare',tz:'Asia/Singapore',l:'Singapore',s:'call',w:'lumenhealth.com',b:'CFO focused on capital strategy and cross-border expansion.'},
+d:{n:'Daniel Whitford',h:'@dwhitford',t:'Chairman',c:'Whitford Group',i:'Family Office',tz:'Europe/Zurich',l:'Zurich',s:'online',w:'whitfordgroup.ch',b:'Chairman of a third-generation family office.'},
+me:{n:'Alexander Reid',h:'@areid',t:'Founder & CEO',c:'Reid Partners',tz:'Asia/Kolkata',l:'Hyderabad',s:'online',i:'Investments & Technology',w:'reidpartners.com',b:'Founder of Reid Partners. I back and advise ambitious operators building lasting companies across technology and healthcare.'}};
+const F=(n,z,k)=>({n,z,k});
+let C=[
+{id:1,p:'e',pin:1,u:2,m:[{f:'e',x:'Alexander, the revised term sheet is attached. Can we align before Thursday?',tm:'08:41',a:F('Term Sheet v3.pdf','1.2 MB','PDF'),r:['🤝']},{f:'me',x:'Thank you, Eleanor. Reviewing tonight.',tm:'08:55',s:3},{f:'e',x:'Wonderful. I’ll hold 30 minutes after the board call.',tm:'09:12'},{f:'e',x:'Also, Sofia’s team sent the site renderings.',tm:'09:13'}]},
+{id:2,p:'m',u:0,m:[{call:'Video call · Completed · 24 min',tm:'Yesterday'},{f:'m',x:'Great speaking. Sending the product deck now.',tm:'Yesterday',a:F('Northwind Deck.pptx','8.4 MB','PPT')},{f:'me',x:'Received. Impressive traction.',tm:'Yesterday',s:3,r:['👏']}]},
+{id:3,g:1,name:'Project Halcyon · Deal Room',mem:['e','m','j'],u:1,m:[{f:'e',x:'Diligence materials are in the shared folder.',tm:'10:02',a:F('Halcyon Data Room Index.xlsx','340 KB','XLS')},{f:'j',x:'Site visit confirmed for Friday morning.',tm:'10:20'},{f:'me',x:'Perfect. I will join remotely.',tm:'10:24',s:2}]},
+{id:4,p:'s',u:0,m:[{f:'s',x:'Sharing the villa renderings. Feedback welcome.',tm:'Mon',a:F('Villa Aurora Renderings.pdf','14.2 MB','PDF')},{f:'me',x:'Elegant work. The courtyard is superb.',tm:'Mon',s:3,r:['❤️']}]},
+{id:5,p:'j',u:1,m:[{call:'Missed call · Julian Park',tm:'08:05'},{f:'j',x:'A penthouse just came off-market. Shall I send details?',tm:'08:07'}]},
+{id:6,p:'d',req:1,u:1,intro:'Alexander, we met at the Davos dinner. I would value a connection.',m:[]}];
+let CALLS=[{p:'m',k:'video',d:'Completed',du:'24 min',w:'Yesterday'},{p:'j',k:'audio',d:'Missed',du:'',w:'Today'},{p:'e',k:'audio',d:'Outgoing',du:'6 min',w:'Mon'},{p:'s',k:'video',d:'Completed',du:'41 min',w:'Last week'}];
+let cur=null,tab='home',flt='All',q='',rep=null,S={rr:1},T=null,sec=0,cs={};
+const now=()=>new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
+const lt=tz=>new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit',timeZone:tz});
+const nm=c=>c.g?c.name:P[c.p].n;
+const av=(k,z=40)=>{const i=Object.keys(P).indexOf(k);const n=k==='g'?'G':P[k].n;return `<div class="av" style="width:${z}px;height:${z}px;background:${COL[i<0?0:i]};font-size:${z/2.6}px">${k==='g'?'H':n.split(' ').map(w=>w[0]).join('')}</div>`};
+const cav=(c,z)=>c.g?av('g',z):av(c.p,z);
+const stl=k=>`<span class="dot" style="background:${ST[k][1]}"></span>${ST[k][0]}`;
+const prev=c=>{const m=c.m[c.m.length-1];return c.req?c.intro:!m?'':m.call||(m.a?'📎 '+m.a.n:m.x)};
+function renderList(){
+ $('#sb').hidden=tab!=='msg';
+ if(tab==='calls'){$('#list').innerHTML=CALLS.map((c,i)=>`<li class="cl" style="cursor:default">${av(c.p,40)}<div class="li"><b>${P[c.p].n}</b><div style="color:${c.d==='Missed'?'#B91C1C':'var(--mu)'};font-size:.8rem">${c.k==='video'?'Video':'Audio'} · ${c.d}${c.du?' · '+c.du:''} · ${c.w}</div></div><button class="ib" data-cb="${i}" aria-label="Call back">${ic(c.k==='video'?'video':'phone')}</button></li>`).join('');return}
+ $('#fl').innerHTML=['All','Unread','Direct','Groups','Requests'].map(f=>`<button class="${f===flt?'on':''}">${f}</button>`).join('');
+ const L=C.filter(c=>({All:1,Unread:c.u>0,Direct:!c.g&&!c.req,Groups:c.g,Requests:c.req})[tab==='home'?'All':flt]&&(!q||(nm(c)+' '+(c.p?P[c.p].c+P[c.p].h:'')+c.m.map(m=>m.x||'').join(' ')).toLowerCase().includes(q))).sort((a,b)=>(b.pin||0)-(a.pin||0));
+ $('#list').innerHTML=L.map(c=>`<li data-id="${c.id}" class="${cur&&cur.id===c.id?'on':''}">${cav(c,44)}<div class="li"><div class="r1"><b>${c.pin?'◆ ':''}${E(nm(c))}</b><span>${c.m.length?c.m[c.m.length-1].tm:''}</span></div><div class="r2"><span>${E(prev(c))}</span>${c.u?`<span class="badge">${c.u}</span>`:''}</div></div></li>`).join('')||'<li style="color:var(--mu)">No conversations found.</li>'}
+function renderChat(keep){
+ const c=cur,el=$('#chat');if(tab==='home'){home(el);return}
+ if(!c){el.innerHTML='<div class="empty"><div class="mono" style="margin:0 auto 1rem">A</div><p class="serif" style="font-size:1.5rem;margin:0">Select a conversation</p><p>Private correspondence for modern leaders.</p></div>';return}
+ const p=c.g?null:P[c.p];
+ el.innerHTML=`<div class="ch"><button class="ib back" aria-label="Back">${ic('back')}</button>${cav(c,40)}<div class="t" id="ti"><b>${E(nm(c))}</b><span>${c.g?c.mem.length+1+' members':p.t+' · '+p.c}</span></div><button class="ib" data-call="audio" aria-label="Audio call">${ic('phone')}</button><button class="ib" data-call="video" aria-label="Video call">${ic('video')}</button><button class="ib" id="ti2" aria-label="Details">${ic('info')}</button></div>
+ ${c.req?`<div class="req"><b>Connection request</b><p>“${E(c.intro)}”</p><button class="btn" id="acc">Accept</button> <button class="btn o" id="ign">Ignore</button></div>`:''}
+ <div id="msgs">${c.m.map((m,i)=>{if(m.call)return `<div class="sys">${ic('phone',13)} ${m.call} · ${m.tm}</div>`;const me=m.f==='me',rx={};(m.r||[]).forEach(e=>rx[e]=(rx[e]||0)+1);
+ return `<div class="row ${me?'mine':''}" data-i="${i}"><div class="hov">${['👍','❤️','👏','🤝','✅'].map(e=>`<button data-r="${e}">${e}</button>`).join('')}<button data-rep aria-label="Reply">↩</button></div><div class="bub">${c.g&&!me?`<div class="who">${P[m.f].n}</div>`:''}${m.q!=null&&c.m[m.q]?`<div class="quote">${E(c.m[m.q].x||c.m[m.q].a.n)}</div>`:''}${m.a?`<div class="file"><i>${m.a.k}</i><div>${E(m.a.n)}<small>${m.a.z}</small></div><a href="#" data-dl>Download</a></div>`:''}${m.x?E(m.x):''}<div class="meta">${m.tm}${me&&S.rr?` <span class="tk ${m.s===3?'rd':''}">${m.s===1?'✓':'✓✓'}</span>`:''}</div></div>${Object.keys(rx).length?`<div class="rx">${Object.entries(rx).map(([e,n])=>`<span>${e}${n>1?' '+n:''}</span>`).join('')}</div>`:''}</div>`}).join('')}</div>
+ <div id="typing" aria-live="polite">${c.ty?E(c.g?P[c.mem[0]].n:p.n.split(' ')[0])+' is typing…':''}</div>
+ ${rep!=null?`<div id="rp"><span>Replying to: ${E(c.m[rep].x||c.m[rep].a.n)}</span><button id="xr" aria-label="Cancel reply">✕</button></div>`:''}
+ <div class="cmp"><label class="ib" style="cursor:pointer" aria-label="Attach file">${ic('clip')}<input type="file" id="fi" hidden></label><input type="text" id="mi" placeholder="Write a message" aria-label="Message"><button class="ib" id="eb" aria-label="Emoji">${ic('smile')}</button><button class="btn" id="sb2" aria-label="Send" style="padding:.55rem .8rem">${ic('send',16)}</button><div id="emo" hidden>${'👍❤️👏🤝✅🙏🎉🥂💼📈🔒⭐🌍☕✈️🏛️😊😂🤔👀💡📎🗓️🚀'.match(/\p{Extended_Pictographic}\uFE0F?/gu).map(e=>`<button>${e}</button>`).join('')}</div></div>`;
+ const mg=$('#msgs');mg.scrollTop=mg.scrollHeight;
+ const t=$('#ti2');if(!keep)document.querySelector('#msgs');
+}
+function renderInfo(){
+ const c=cur;if(!c){$('#info').innerHTML='';return}
+ const fs=c.m.filter(m=>m.a),cl=c.g?[]:CALLS.filter(x=>x.p===c.p);
+ const f=fs.map(m=>`<div class="file"><i>${m.a.k}</i><div>${E(m.a.n)}<small>${m.a.z}</small></div></div>`).join('')||'<p style="color:var(--mu);margin:0">No shared files yet.</p>';
+ if(c.g){$('#info').innerHTML=`<div class="pc">${av('g',72)}<h3>${E(c.name)}</h3><p>Private group · ${c.mem.length+1} members</p></div><h4>Members</h4>${['me',...c.mem].map(k=>`<div class="cl" style="border:0;padding:.3rem 0">${av(k,32)}<div class="li">${P[k].n}<small style="display:block;color:var(--mu)">${k==='me'?'Admin':k==='e'?'Admin':'Member'}</small></div></div>`).join('')}<h4>Shared files</h4>${f}<button class="ib" id="ci" style="float:right">${ic('back')}</button>`;return}
+ const p=P[c.p];
+ $('#info').innerHTML=`<div class="pc">${av(c.p,72)}<h3>${p.n}</h3><p>${p.t}</p><p>${p.c} · ${p.i}</p><p>${stl(p.s)}</p><p>${p.l} · ${lt(p.tz)} local</p></div><h4>About</h4><p style="margin:0">${p.b}</p><p style="margin:.5rem 0 0"><a href="#" style="color:var(--gold)">${p.w}</a> · ${p.h}</p><h4>Call history</h4>${cl.map(x=>`<div style="font-size:.85rem;color:var(--mu)">${x.k==='video'?'Video':'Audio'} · ${x.d}${x.du?' · '+x.du:''} · ${x.w}</div>`).join('')||'<p style="color:var(--mu);margin:0">No calls yet.</p>'}<h4>Shared files</h4>${f}<button class="btn o" id="ci" style="margin-top:1rem;width:100%">Close</button>`}
+function open(id){cur=C.find(c=>c.id===id);cur.u=0;tab='msg';syncTabs();rep=null;$('#app').classList.add('vc');renderList();renderChat();renderInfo()}
+function syncTabs(){document.querySelectorAll('.tabs button').forEach(b=>b.classList.toggle('on',b.dataset.t===tab));$('#app').classList.toggle('hm',tab==='home');if(tab==='home')$('#app').classList.remove('io','vc')}
+function splash(){const s=$('#splash');s.classList.remove('up');s.hidden=false;setTimeout(()=>{s.classList.add('up');setTimeout(()=>{s.hidden=true},950)},1700)}
+function home(el){const m=P.me,h=new Date().getHours(),g=h<12?'Good morning':h<18?'Good afternoon':'Good evening',un=C.reduce((a,c)=>a+(c.req?0:c.u),0);
+ el.innerHTML=`<div id='hm'><div class='hbn'>${g}, Alexander</div><div class='hw'><div class='hc'><div class='hav'>${av('me',104)}</div><div class='hn'><h2>${m.n}</h2><p>${m.t}, ${m.c}</p><p>${m.l} · ${lt(m.tz)} local</p></div><select id='st' aria-label='Availability'>${Object.keys(ST).map(k=>`<option value='${k}' ${k===m.s?'selected':''}>${ST[k][0]}</option>`).join('')}</select></div>
+<div class='hs'><div><b>${un}</b><span>Unread messages</span></div><div><b>${C.filter(c=>c.req).length}</b><span>Pending requests</span></div><div><b>${C.filter(c=>c.p&&!c.req).length}</b><span>Connections</span></div></div>
+<div class='hb'><p style='margin:0 0 .75rem'>${m.b}</p><p style='margin:0;color:var(--mu);font-size:.9rem'>${m.h} · ${m.i} · <a href='#' style='color:var(--gold)'>${m.w}</a></p></div>
+<h3>Recent conversations</h3>${C.filter(c=>!c.req).slice(0,4).map(c=>`<button class='hr' data-o='${c.id}'>${cav(c,40)}<div class='li'><div class='r1'><b>${E(nm(c))}</b><span>${c.m[c.m.length-1].tm}</span></div><div class='r2'><span>${E(prev(c))}</span>${c.u?`<span class='badge'>${c.u}</span>`:''}</div></div></button>`).join('')}
+<div style='display:flex;gap:.5rem;margin-top:1rem;flex-wrap:wrap'><button class='btn' data-h='msg'>Open messages</button><button class='btn o' data-h='calls'>Calls</button><button class='btn o' data-h='set'>Settings</button></div></div></div>`}
+const mk=(c,x,a)=>{c.m.push({f:'me',x,a,q:rep,tm:now(),s:1});rep=null};
+function send(x,a){const c=cur;if(!c||c.req||(!x&&!a))return;mk(c,x,a);const m=c.m[c.m.length-1];renderChat();renderList();
+ setTimeout(()=>{m.s=2;cur===c&&renderChat()},600);
+ setTimeout(()=>{c.ty=1;cur===c&&renderChat()},1200);
+ setTimeout(()=>{c.ty=0;const k=c.g?c.mem[0]:c.p;c.m.forEach(z=>z.f==='me'&&(z.s=3));c.m.push({f:k,x:['Understood. Thank you.','Agreed. Let’s proceed.','Noted. I’ll revert shortly.','Excellent. Speak soon.'][Math.random()*4|0],tm:now()});if(cur===c){renderChat()}else c.u++;renderList()},3000)}
+document.addEventListener('click',e=>{
+ const t=e.target,g=s=>t.closest(s);
+ if(g('.go')){$('#login').hidden=true;$('#app').hidden=false;$('#gear').innerHTML=ic('gear');syncTabs();renderList();renderChat();splash();setTimeout(()=>incoming(2),12000);return}
+ if(g('.tabs button')){tab=g('.tabs button').dataset.t;if(tab==='home')cur=null;syncTabs();renderList();renderChat();return}
+ if(g('#fl button')){flt=t.textContent;renderList();return}
+ if(g('#list li[data-id]')){open(+g('#list li').dataset.id);return}
+ if(g('[data-cb]')){const x=CALLS[+g('[data-cb]').dataset.cb];cur=C.find(c=>c.p===x.p);open(cur.id);startCall(x.k);return}
+ if(g('#gear')){settings();return}
+ if(g('[data-h]')){const h=g('[data-h]').dataset.h;if(h==='set'){settings();return}tab=h;cur=null;syncTabs();renderList();renderChat();return}
+ if(g('[data-o]')){open(+g('[data-o]').dataset.o);return}
+ if(g('.back')){$('#app').classList.remove('vc','io');return}
+ if(g('#ti')||g('#ti2')){$('#app').classList.toggle('io');renderInfo();return}
+ if(g('#ci')){$('#app').classList.remove('io');return}
+ if(g('[data-call]')){startCall(g('[data-call]').dataset.call);return}
+ if(g('#sb2')){const i=$('#mi');send(i.value.trim());return}
+ if(g('#eb')){$('#emo').hidden=!$('#emo').hidden;return}
+ if(g('#emo button')){const i=$('#mi');i.value+=t.textContent;i.focus();return}
+ if(g('#xr')){rep=null;renderChat();return}
+ if(g('#acc')){cur.req=0;cur.intro&&cur.m.push({f:cur.p,x:cur.intro,tm:now()});renderChat();renderList();return}
+ if(g('#ign')){C=C.filter(c=>c!==cur);cur=null;$('#app').classList.remove('vc');renderChat();renderList();return}
+ if(g('[data-dl]')){e.preventDefault();return}
+ const row=g('.row');
+ if(row&&g('[data-r]')){const m=cur.m[+row.dataset.i],r=t.closest('[data-r]').dataset.r;m.r=m.r||[];const k=m.r.indexOf(r);k<0?m.r.push(r):m.r.splice(k,1);renderChat();return}
+ if(row&&g('[data-rep]')){rep=+row.dataset.i;renderChat();$('#mi').focus();return}
+ if(!g('#emo')&&$('#emo'))$('#emo').hidden=true;
+});
+document.addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target.id==='mi')send(e.target.value.trim());if(e.key==='Enter'&&e.target.id==='ci2'){const v=e.target.value.trim();if(v){mk(cur,v);e.target.value='';csr()}}});
+document.addEventListener('input',e=>{if(e.target.id==='q'){q=e.target.value.toLowerCase();renderList()}});
+document.addEventListener('change',e=>{const f=e.target.files&&e.target.files[0];if(e.target.id==='fi'&&f){const k=(f.name.split('.').pop()||'FILE').slice(0,3).toUpperCase();send('',F(f.name,f.size>1e6?(f.size/1e6).toFixed(1)+' MB':Math.ceil(f.size/1e3)+' KB',k))}
+ if(e.target.id==='st'){P.me.s=e.target.value;return}if(e.target.id==='rr')S.rr=e.target.checked,renderChat();if(e.target.id==='dn')$('#app').classList.toggle('compact',e.target.value==='Compact')});
+/* calls */
+function incoming(id){const c=C.find(x=>x.id===id),p=P[c.p];if(!$('#call').hidden)return;const el=$('#inc');el.hidden=false;el.innerHTML=`<div class="g">${av(c.p,48)}<div><b>${p.n}</b><small>${p.t}, ${p.c}</small><small>Auren video call…</small></div></div><div class="a"><button class="btn" id="ia">Accept</button><button class="btn o" id="id">Decline</button></div>`;
+ $('#ia').onclick=()=>{el.hidden=true;open(id);startCall('video')};$('#id').onclick=()=>{el.hidden=true;c.m.push({call:'Declined call',tm:now()});CALLS.unshift({p:c.p,k:'video',d:'Declined',du:'',w:'Today'});renderList()}}
+function startCall(k){const c=cur;cs={k,mic:1,cam:k==='video',sc:0,side:0,c};sec=0;$('#call').hidden=false;$('#call').classList.remove('mini');drawCall();T=setInterval(()=>{sec++;const el=$('#dur');if(el)el.textContent=fmt()},1000)}
+const fmt=()=>String(sec/60|0).padStart(2,'0')+':'+String(sec%60).padStart(2,'0');
+function csr(){const el=$('#cs');if(el)el.innerHTML=cs.c.m.slice(-5).map(m=>m.call?'':`<div><b>${m.f==='me'?'You':P[m.f].n.split(' ')[0]}</b>: ${E(m.x||m.a.n)}</div>`).join('')+'<input id="ci2" type="text" placeholder="Message during call" style="border:1px solid var(--l);border-radius:8px;padding:.4rem;margin-top:auto" aria-label="In-call message">'}
+function drawCall(){const c=cs.c,k=c.g?'g':c.p;
+ $('#call').innerHTML=`<div class="stg"><div class="cinfo">${E(nm(c))} · <span id="dur">${fmt()}</span> · ▂▄▆ HD${cs.sc?' · You’re presenting':''}</div><div style="text-align:center;outline:3px solid ${'#8B7355'};outline-offset:10px;border-radius:50%;width:fit-content">${av(k,110)}</div><div class="me-t">${cs.cam?'You':'Camera off'}</div>${cs.side?'<div id="cs"></div>':''}</div>
+ <div class="ctl"><button class="${cs.mic?'':'off'}" data-c="mic" aria-label="Mute">${ic(cs.mic?'mic':'micoff')}</button><button class="${cs.cam?'':'off'}" data-c="cam" aria-label="Camera">${ic(cs.cam?'video':'camoff')}</button><button class="${cs.sc?'off':''}" data-c="sc" aria-label="Share screen">${ic('screen')}</button><button data-c="side" aria-label="Chat">${ic('chat')}</button><button class="pip" data-c="pip" aria-label="Mini window">${ic('pip')}</button><button class="end" data-c="end" aria-label="End call">${ic('end')}</button></div>`;
+ csr();document.querySelectorAll('#call [data-c]').forEach(b=>b.onclick=()=>{const a=b.dataset.c;if(a==='end'){clearInterval(T);const l=`${cs.k==='video'?'Video':'Audio'} call · Outgoing · ${Math.max(1,Math.round(sec/60))} min`;cs.c.m.push({call:l,tm:now()});if(!cs.c.g)CALLS.unshift({p:cs.c.p,k:cs.k,d:'Outgoing',du:Math.max(1,Math.round(sec/60))+' min',w:'Today'});$('#call').hidden=true;renderList();cur===cs.c&&renderChat();return}
+  if(a==='pip'){$('#call').classList.toggle('mini');return}cs[a]=!cs[a];drawCall()})}
+/* settings */
+function settings(){const s=$('#set');s.hidden=false;s.innerHTML=`<div class="card"><h2 class="serif">Settings</h2><div class="tg"><span>Who can message or call you</span><select><option>Connections only</option><option>Everyone</option><option>Approval required</option></select></div><div class="tg"><span>Show online status</span><input type="checkbox" checked></div><div class="tg"><span>Show last seen</span><input type="checkbox" checked></div><div class="tg"><span>Read receipts</span><input id="rr" type="checkbox" ${S.rr?'checked':''}></div><div class="tg"><span>Disappearing messages</span><select><option>Off</option><option>24 hours</option><option>7 days</option><option>30 days</option></select></div><div class="tg"><span>Message alerts</span><input type="checkbox" checked></div><div class="tg"><span>Text density</span><select id="dn"><option>Comfortable</option><option>Compact</option></select></div><button class="btn" id="sx" style="margin-top:1rem;width:100%">Done</button></div>`;$('#sx').onclick=()=>s.hidden=true}
+</script>
+</body>
+</html>
